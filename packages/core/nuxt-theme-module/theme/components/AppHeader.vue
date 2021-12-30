@@ -165,7 +165,7 @@ export default {
 
     const closeSearch = () => {
       const wishlistClassName = 'sf-product-card__wishlist-icon';
-      const isWishlistIconClicked = event.path.find(p => wishlistClassName.search(p.className) > 0);
+      const isWishlistIconClicked = event.path ? event.path.find(p => wishlistClassName.search(p.className) > 0) : false;
       if (isWishlistIconClicked || !isSearchOpen.value) return;
 
       term.value = '';
