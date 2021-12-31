@@ -13,24 +13,23 @@
     >
       <SfList>
         <SfListItem v-for="store in availableStores" :key="store.id">
-          <a
-            href="/"
-            class="container__store--link"
-            :class="isStoreSelected(store) ? 'container__store--selected' : ''"
-            @click="changeStore(store)"
-          >
             <SfCharacteristic class="language">
               <template #title>
                 <span>{{ store.name }}</span>
               </template>
               <template #icon>
-                <SfImage :src="`/icons/langs/${getStoreLocale(store)}.webp`" width="20" alt="Flag" class="language__flag" />
+                <SfList>
+                <li v-for="lang in getStoreLocale(store)" :key="lang" @click="changeStore(store)" >
+                <nuxt-link :to="switchLocalePath(lang)">
+                <SfImage  :src="`/icons/langs/${lang}.webp`" width="20" alt="Flag" class="language__flag" />
+                </nuxt-link>
+                </li>
+                </SfList>
               </template>
             </SfCharacteristic>
-          </a>
         </SfListItem>
       </SfList>
-
+<!--
       <SfHeading
         :level="3"
         title="Choose language"
@@ -50,6 +49,7 @@
           </nuxt-link>
         </SfListItem>
       </SfList>
+      -->
     </SfBottomModal>
   </div>
 </template>
@@ -99,7 +99,7 @@ export default {
     };
 
     const isStoreSelected = (store) => selectedStore.value?.id === store.id;
-    const getStoreLocale = (store) => store?.languages[0] ?? defaultLocale;
+    const getStoreLocale = (store) => store?.languages ?? [defaultLocale];
 
     return {
       changeStore,
@@ -146,6 +146,9 @@ export default {
     @include for-desktop {
       display: flex;
     }
+  }
+  .sf-list__item {
+    margin: 0
   }
 
   &__store {
