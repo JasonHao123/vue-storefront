@@ -14,6 +14,7 @@ export interface ClientInstance extends ApolloClient<any> {
 }
 
 export interface ApiConfig {
+  url: string;
   uri: string;
   authHost: string;
   projectKey: string;
