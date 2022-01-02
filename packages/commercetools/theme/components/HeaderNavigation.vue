@@ -5,8 +5,8 @@
       :key="index"
       class="nav-item"
       v-e2e="`app-header-url_${category}`"
-      :label="category"
-      :link="localePath(`/c/${category}`)"
+      :label="category.name"
+      :link="localePath(`/c/${category.key}`)"
     />
   </div>
   <SfModal v-else :visible="isMobileMenuOpen">
@@ -18,9 +18,9 @@
     >
       <template #mobile-navigation-item>
         <SfMenuItem
-          :label="category"
+          :label="category.name"
           class="sf-header-navigation-item__menu-item"
-          :link="localePath(`/c/${category}`)"
+          :link="localePath(`/c/${category.key}`)"
           @click="toggleMobileMenu"
         />
       </template>
@@ -31,6 +31,10 @@
 <script>
 import { SfMenuItem, SfModal } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
+import {
+  useStore
+} from '@vue-storefront/commercetools';
+import { computed } from '@nuxtjs/composition-api';
 
 export default {
   name: 'HeaderNavigation',
@@ -46,7 +50,18 @@ export default {
   },
   setup() {
     const { isMobileMenuOpen, toggleMobileMenu } = useUiState();
-    const categories = ['women', 'men'];
+
+    const { response } = useStore();
+    function getSelected(stores) {
+      if (stores._selectedStore) {
+        return stores.results?.find((result) => result.key === String(stores._selectedStore));
+      } else {
+        return stores.results?.find((result) => result.selected);
+      }
+    }
+
+    const selectedStore = computed(() => getSelected(response.value));
+    const categories = selectedStore.value ? selectedStore.value.catalogs : [];
 
     return {
       categories,

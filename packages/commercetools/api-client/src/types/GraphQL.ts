@@ -11231,6 +11231,18 @@ export type Store = Versioned & {
   custom?: Maybe<CustomFieldsType>;
   createdBy?: Maybe<Initiator>;
   lastModifiedBy?: Maybe<Initiator>;
+  selected: Scalars['Boolean'];
+  catalogs: Array<Catalog>;
+};
+
+export type Catalog = Versioned & {
+  __typename?: 'Store';
+  id: Scalars['String'];
+  version: Scalars['Long'];
+  key: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  logo?: Maybe<Scalars['String']>;
+
 };
 
 

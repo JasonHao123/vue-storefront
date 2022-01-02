@@ -12,7 +12,7 @@
       @click:close="isLangModalOpen = !isLangModalOpen"
     >
       <SfList>
-        <SfListItem v-for="store in availableStores" :key="store.id">
+        <SfListItem v-for="store in availableStores" :key="store.id" :class="isStoreSelected(store) ? 'container__store--selected' : ''">
             <SfCharacteristic class="language">
               <template #title>
                 <span>{{ store.name }}</span>
@@ -86,7 +86,11 @@ export default {
 
     // to be added on local useStore factory
     function getSelected(stores) {
-      return stores.results?.find((result) => result.key === stores._selectedStore);
+      if (stores._selectedStore) {
+        return stores.results?.find((result) => result.key === String(stores._selectedStore));
+      } else {
+        return stores.results?.find((result) => result.selected);
+      }
     }
 
     const availableStores = computed(() => response.value?.results ?? []);

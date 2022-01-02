@@ -28,7 +28,7 @@ export default async function getStores(context: Context, params?: GetStoresPara
   // });
   // Create URL object containing full endpoint URL
   const options = {
-    headers: {'x-forwarded-host': context.config.domain, 'Accept-Language': context.config.locale}
+    headers: {'x-forwarded-host': context.config.domain, 'Accept-Language': context.config.acceptLanguage}
   };
 
   // Use axios to send a GET request
