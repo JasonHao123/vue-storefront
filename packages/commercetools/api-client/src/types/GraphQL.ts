@@ -11246,6 +11246,14 @@ export type Catalog = Versioned & {
 
 };
 
+export type StoreGroup = Versioned & {
+  __typename?: 'StoreGroup';
+  id: Scalars['String'];
+  version: Scalars['Long'];
+  key: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
 
 /** Stores allow defining different contexts for a project. */
 export type StoreNameArgs = {
@@ -11274,6 +11282,8 @@ export type StoreQueryResult = {
   /** BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features */
   exists: Scalars['Boolean'];
   results: Array<Store>;
+  groups: Array<StoreGroup>;
+
 };
 
 export type SubRate = {

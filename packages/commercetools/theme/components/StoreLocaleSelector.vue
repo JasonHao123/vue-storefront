@@ -12,7 +12,31 @@
       :title="availableStores.length > 0 ? 'Choose store': ''"
       @click:close="isLangModalOpen = !isLangModalOpen"
     >
+
+    <SfList v-if="storeGroups.length > 0">
+      <SfListItem v-for="group in storeGroups" :key="group.id" >
+      <h4>{{group.name}}</h4>
       <SfList>
+        <SfListItem v-if="store.groupId == group.id" v-for="store in availableStores" :key="store.id" :class="isStoreSelected(store) ? 'container__store--selected' : ''">
+            <SfCharacteristic class="language">
+              <template #title>
+                <span>{{ store.name }}</span>
+              </template>
+              <template #icon>
+                <SfList>
+                <li v-for="lang in getStoreLocale(store)" :key="lang" @click="changeStore(store)" >
+                <nuxt-link :to="switchLocalePath(lang)">
+                <SfImage  :src="`/icons/langs/${lang}.webp`" width="20" alt="Flag" class="language__flag" />
+                </nuxt-link>
+                </li>
+                </SfList>
+              </template>
+            </SfCharacteristic>
+        </SfListItem>
+        </SfList>
+        </SfListItem>
+      </SfList>
+      <SfList v-if="storeGroups.length == 0">
         <SfListItem v-for="store in availableStores" :key="store.id" :class="isStoreSelected(store) ? 'container__store--selected' : ''">
             <SfCharacteristic class="language">
               <template #title>
@@ -95,6 +119,8 @@ export default {
     }
 
     const availableStores = computed(() => response.value?.results ?? []);
+    const storeGroups = computed(() => response.value?.groups ?? []);
+
     const selectedStore = computed(() => getSelected(response.value));
 
     const changeStore = async (store) => {
@@ -108,6 +134,7 @@ export default {
 
     return {
       changeStore,
+      storeGroups,
       response,
       availableStores,
       selectedStore,
