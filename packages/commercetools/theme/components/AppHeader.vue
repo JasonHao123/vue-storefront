@@ -8,7 +8,7 @@
       <!-- TODO: add mobile view buttons after SFUI team PR -->
       <template #logo>
         <nuxt-link :to="localePath('/')" class="sf-header__logo">
-          <SfImage src="/icons/logo.svg" alt="Vue Storefront Next" class="sf-header__logo-image"/>
+          <SfImage :src="logo" alt="Vue Storefront Next" class="sf-header__logo-image"/>
         </nuxt-link>
       </template>
       <template #navigation>
@@ -121,6 +121,7 @@ import {
 } from '@storefront-ui/vue/src/utilities/mobile-observer.js';
 import debounce from 'lodash.debounce';
 import mockedSearchProducts from '../mockedSearchProducts.json';
+import { useStore } from '@vue-storefront/commercetools';
 
 export default {
   components: {
@@ -149,6 +150,17 @@ export default {
     const searchBarRef = ref(null);
     const result = ref(null);
     const isMobile = ref(mapMobileObserver().isMobile.get());
+    const { response } = useStore();
+    function getSelected(stores) {
+      if (stores._selectedStore) {
+        return stores.results?.find((result) => result.key === String(stores._selectedStore));
+      } else {
+        return stores.results?.find((result) => result.selected);
+      }
+    }
+
+    const selectedStore = computed(() => getSelected(response.value));
+    const logo = selectedStore.value.logo;
 
     const cartTotalItems = computed(() => {
       const count = cartGetters.getTotalItems(cart.value);
@@ -217,6 +229,7 @@ export default {
       toggleWishlistSidebar,
       setTermForUrl,
       term,
+      logo,
       isSearchOpen,
       closeSearch,
       handleSearch,

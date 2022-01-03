@@ -5,6 +5,7 @@
       @click="isLangModalOpen = !isLangModalOpen"
     >
       <SfImage :src="`/icons/langs/${locale}.webp`" width="20" alt="Flag" />
+      <span>{{selectedStore.name}}</span>
     </SfButton>
     <SfBottomModal
       :is-open="isLangModalOpen"
@@ -128,6 +129,12 @@ export default {
   flex-wrap: nowrap;
   align-items: center;
   position: relative;
+  .container__lang--selected {
+    span {
+       color: black;
+       padding-left: 5px;
+    }
+  }
   .sf-bottom-modal {
     z-index: 2;
     left: 0;

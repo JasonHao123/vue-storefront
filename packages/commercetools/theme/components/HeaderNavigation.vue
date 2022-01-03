@@ -31,9 +31,7 @@
 <script>
 import { SfMenuItem, SfModal } from '@storefront-ui/vue';
 import { useUiState } from '~/composables';
-import {
-  useStore
-} from '@vue-storefront/commercetools';
+import { useStore } from '@vue-storefront/commercetools';
 import { computed } from '@nuxtjs/composition-api';
 
 export default {
@@ -61,9 +59,11 @@ export default {
     }
 
     const selectedStore = computed(() => getSelected(response.value));
+    const logo = selectedStore.value.logo;
     const categories = selectedStore.value ? selectedStore.value.catalogs : [];
 
     return {
+      logo,
       categories,
       isMobileMenuOpen,
       toggleMobileMenu

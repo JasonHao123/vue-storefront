@@ -11220,6 +11220,7 @@ export type Store = Versioned & {
   version: Scalars['Long'];
   key: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  logo?: Maybe<Scalars['String']>;
   nameAllLocales?: Maybe<Array<LocalizedString>>;
   languages?: Maybe<Array<Scalars['Locale']>>;
   distributionChannelsRef: Array<Reference>;
