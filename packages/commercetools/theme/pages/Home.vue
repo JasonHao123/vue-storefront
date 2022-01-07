@@ -151,21 +151,21 @@ export default {
     const { toggleNewsletterModal } = useUiState();
     const products = ref([
       {
-        title: 'Cream Beach Bag',
+        title: 'Cream Beach Bag1',
         image: '/homepage/productA.webp',
         price: { regular: '50.00 $' },
         rating: { max: 5, score: 4 },
         isInWishlist: true
       },
       {
-        title: 'Cream Beach Bag',
+        title: 'Cream Beach Bag2',
         image: '/homepage/productB.webp',
         price: { regular: '50.00 $' },
         rating: { max: 5, score: 4 },
         isInWishlist: false
       },
       {
-        title: 'Cream Beach Bag',
+        title: 'Cream Beach Bag3',
         image: '/homepage/productC.webp',
         price: { regular: '50.00 $' },
         rating: { max: 5, score: 4 },
