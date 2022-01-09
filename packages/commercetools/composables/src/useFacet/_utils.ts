@@ -13,7 +13,7 @@ export const buildBreadcrumbs = (rootCat) =>
       { ...curr, link: `${prev[index - 1]?.link || '' }/${curr.link}` }]),
     []);
 
-const filterFacets = criteria => f => criteria ? criteria.includes(f) : true;
+// const filterFacets = criteria => f => criteria ? criteria.includes(f) : true;
 
 const createFacetsFromOptions = (facets, filters, filterKey) => {
   const options = facets[filterKey]?.options || [];
@@ -46,7 +46,7 @@ export const reduceForGroupedFacets = (facets, filters) => (prev, curr) => ([
 ]);
 
 export const buildFacets = (searchData: SearchData, reduceFn, criteria?: string[]) => {
-  if (!searchData.data) {
+  if (searchData.data) {
     return [];
   }
 

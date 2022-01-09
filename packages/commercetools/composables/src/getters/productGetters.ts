@@ -1,15 +1,15 @@
 import { ProductGetters, AgnosticMediaGalleryItem, AgnosticAttribute, AgnosticPrice } from '@vue-storefront/core';
 import { ProductVariant, Image } from '@vue-storefront/commercetools-api';
-import { formatAttributeList, getVariantByAttributes, createPrice } from './_utils';
+import { formatAttributeList, createPrice } from './_utils';
 
 export interface ProductVariantFilters {
   master?: boolean;
   attributes?: Record<string, string>;
 }
 
-export const getProductName = (product: ProductVariant | Readonly<ProductVariant>): string => (product as any)?._name || '';
+export const getProductName = (product: ProductVariant | Readonly<ProductVariant>): string => (product as any)?.name || 'name';
 
-export const getProductSlug = (product: ProductVariant | Readonly<ProductVariant>): string => (product as any)?._slug || '';
+export const getProductSlug = (product: ProductVariant | Readonly<ProductVariant>): string => (product as any)?.slug || 'test';
 
 export const getProductPrice = (product: ProductVariant | Readonly<ProductVariant>): AgnosticPrice => createPrice(product);
 
@@ -26,17 +26,21 @@ export const getProductGallery = (product: ProductVariant): AgnosticMediaGallery
 export const getProductCoverImage = (product: ProductVariant): string => product?.images?.[0]?.url || '';
 
 export const getProductFiltered = (products: ProductVariant[], filters: ProductVariantFilters | any = {}): ProductVariant[] => {
+  console.log('>>>>>>>>>>>>>>productFilter.getFiltered>>>>>>>>>>');
+  console.log(products);
   if (!products) {
     return [];
   }
 
-  if (filters.attributes && Object.keys(filters.attributes).length > 0) {
-    return [getVariantByAttributes(products, filters.attributes)];
-  }
-
+  // if (filters.attributes && Object.keys(filters.attributes).length > 0) {
+  //   return [getVariantByAttributes(products, filters.attributes)];
+  // }
+  //
+  console.log(filters);
   if (filters.master) {
     return products.filter((product) => (product as any)._master);
   }
+  console.log('<<<<<<<<<<<<<productGetter.getProductFiltered<<<<<<<<<<<<');
 
   return products;
 };
@@ -80,19 +84,19 @@ export const getProductAttributes = (products: ProductVariant[] | ProductVariant
     .reduce(reduceByAttributeName, {});
 };
 
-export const getProductDescription = (product: ProductVariant): any => (product as any)?._description || '';
+export const getProductDescription = (product: ProductVariant): any => (product as any)?.description || 'dddd';
 
-export const getProductCategoryIds = (product: ProductVariant): string[] => (product as any)?._categoriesRef || '';
+export const getProductCategoryIds = (product: ProductVariant): string[] => (product as any)?.categoriesRef || '';
 
-export const getProductId = (product: ProductVariant): string => (product as any)?._id || '';
+export const getProductId = (product: ProductVariant): string => (product as any)?.id || 'id';
 
 export const getFormattedPrice = (price: number) => price as any as string;
 
-export const getTotalReviews = (product: ProductVariant): number => (product as any)?._rating?.count || 0;
+export const getTotalReviews = (product: ProductVariant): number => (product as any)?.rating?.count || 0;
 
-export const getAverageRating = (product: ProductVariant): number => (product as any)?._rating?.averageRating || 0;
+export const getAverageRating = (product: ProductVariant): number => (product as any)?.rating?.averageRating || 0;
 
-export const getProductSku = (product: ProductVariant): any => (product as any)?.sku || '';
+export const getProductSku = (product: ProductVariant): any => (product as any)?.sku || 'sku';
 
 /**
  * @remarks References:

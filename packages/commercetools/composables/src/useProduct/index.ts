@@ -1,7 +1,7 @@
 import { ProductVariant } from '@vue-storefront/commercetools-api';
 import { useProductFactory, UseProduct, Context } from '@vue-storefront/core';
 import { ProductsSearchParams } from '../types';
-import { enhanceProduct, mapPaginationParams, getChannelId } from './../helpers/internals';
+import {mapPaginationParams, getChannelId } from './../helpers/internals';
 
 /**
  * @remarks References:
@@ -9,7 +9,7 @@ import { enhanceProduct, mapPaginationParams, getChannelId } from './../helpers/
  */
 const useProductFactoryParams = {
   productsSearch: async (context: Context, { customQuery, ...searchParams }): Promise<ProductVariant[]> => {
-
+    console.log('-----------useProduct.productSearch-------------');
     const apiSearchParams = {
       ...searchParams,
       ...mapPaginationParams(searchParams),
@@ -17,8 +17,12 @@ const useProductFactoryParams = {
     };
 
     const productResponse = await context.$ct.api.getProduct(apiSearchParams, customQuery);
-    const enhancedProductResponse = enhanceProduct(productResponse, context);
-    const products = (enhancedProductResponse.data as any)._variants;
+    // const enhancedProductResponse = enhanceProduct(productResponse, context);
+    // const products = (enhancedProductResponse.data as any)._variants;
+    const products = productResponse.data.products.results;
+    // (enhancedProductResponse.data as any)._variants as ProductVariant[];
+    console.log(products);
+    console.log('-----------useProduct.productSearch-------------');
 
     return products;
   }

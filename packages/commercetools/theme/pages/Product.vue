@@ -241,6 +241,7 @@ export default {
     'stale-when-revalidate': 5
   }),
   setup() {
+    console.log('>>>>>>>>>>>Product.vue>>>>>>>>>>>');
     const qty = ref(1);
     const route = useRoute();
     const router = useRouter();
@@ -254,7 +255,8 @@ export default {
     function getSelected(stores) {
       return stores.results?.find((result) => result.key === stores._selectedStore);
     }
-
+    console.log('-------product.vue-----------');
+    console.log(products);
     const product = computed(() => productGetters.getFiltered(products.value, { master: true, attributes: route.value.query })[0]);
     const options = computed(() => productGetters.getAttributes(products.value, ['color', 'size']));
     const configuration = computed(() => productGetters.getAttributes(product.value, ['color', 'size']));

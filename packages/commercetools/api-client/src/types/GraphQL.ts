@@ -9883,7 +9883,21 @@ export type ProductQueryResult = {
   total: Scalars['Long'];
   /** BETA: This feature can be subject to change and should be used carefully in production. https://docs.commercetools.com/api/contract#beta-features */
   exists: Scalars['Boolean'];
-  results: Array<Product>;
+  results: Array<ProductVariant>;
+  facets: Array<Facet>;
+
+};
+
+export type Facet = {
+  name: Scalars['String'];
+  type: Scalars['String'];
+  options: Array<Option>;
+};
+
+export type Option = {
+  value: Scalars['String'];
+  label: Scalars['String'];
+  selected: Scalars['Boolean'];
 };
 
 export type ProductSearchPriceTier = {

@@ -39,10 +39,14 @@ const getCategoryTree = (searchData: SearchData): AgnosticCategoryTree => {
 };
 
 const getProducts = (searchData: SearchData): ProductVariant[] => {
+  console.log('--------facetGetter.getproducts');
+  console.log(searchData.data);
   return getProductFiltered(searchData.data?.products || [], { master: true });
 };
 
 const getPagination = (searchData: SearchData): AgnosticPagination => {
+  console.log('--------facetGetter.getPagination');
+  console.log(searchData);
   if (!searchData.data) {
     return {} as any;
   }

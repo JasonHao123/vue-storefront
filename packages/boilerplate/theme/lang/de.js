@@ -4,6 +4,7 @@ export default {
   'Categories': 'Kategorien',
   'Filters': 'Filters',
   'Sort by': 'Sortieren nach',
+  'Select sorting': 'Select sorting',
   'Products found': 'Produkte gefunden',
   'About us': 'Über uns',
   'Who we are': 'Wer wir sind',
