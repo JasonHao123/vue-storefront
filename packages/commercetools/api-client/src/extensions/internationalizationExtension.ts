@@ -8,8 +8,9 @@ function getInternationalizationConfiguration(request, configuration) {
   const currency = request.cookies[currencyCookieName] || configuration.currency || defaultSettings.currency;
   const country = request.cookies[countryCookieName] || configuration.country || defaultSettings.country;
   const store = request.cookies[storeCookieName] || configuration.store;
+  const domain = request.headers.host;
 
-  return { currency, country, locale, store };
+  return { currency, country, locale, store, domain };
 }
 
 export const internationalizationExtension: ApiClientExtension = {

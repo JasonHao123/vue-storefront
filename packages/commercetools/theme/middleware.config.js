@@ -5,6 +5,7 @@ module.exports = {
       location: '@vue-storefront/commercetools-api/server',
       configuration: {
         api: {
+          url: 'http://localhost:8080',
           uri: 'https://api.commercetools.com/vsf-generic-ent-demo/graphql',
           authHost: 'https://auth.europe-west1.gcp.commercetools.com',
           projectKey: 'vsf-generic-ent-demo',

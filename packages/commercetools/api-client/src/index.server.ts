@@ -4,6 +4,7 @@ import { Config } from './types/setup';
 import { getExtensions } from './extensions';
 import { createApolloClient } from './links';
 import { defaultSettings } from './helpers/apiClient/defaultSettings';
+import axios from 'axios';
 
 /**
  * Merges integration configuration with defaults and creates GraphQL client.
@@ -23,7 +24,10 @@ function onCreate(projectSettings: Partial<Config>) {
 
   return {
     config,
-    client: config.client || createApolloClient(config)
+    client: config.client || createApolloClient(config),
+    axios: axios.create({
+      baseURL: projectSettings.api.url
+    })
   };
 }
 

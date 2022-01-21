@@ -78,6 +78,7 @@ export default {
     }],
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
+    '@vue-storefront/health-check',
     '@vue-storefront/middleware/nuxt'
   ],
   i18n: {
